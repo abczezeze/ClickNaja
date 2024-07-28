@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwuwpwr0wfgji"]
+
+[ext_resource type="Script" path="res://Scripts/MainScene.cs" id="1_m0mfw"]
+[ext_resource type="PackedScene" uid="uid://5jncdr384qng" path="res://Scenes/Tadpole.tscn" id="2_gypdm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n1is6"]
+sky_top_color = Color(0.26011, 0.69825, 0.999754, 1)
+
+[sub_resource type="Sky" id="Sky_a3v11"]
+sky_material = SubResource("ProceduralSkyMaterial_n1is6")
+
+[sub_resource type="Environment" id="Environment_ik85x"]
+background_mode = 2
+sky = SubResource("Sky_a3v11")
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_m0mfw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.895712, 0.444635, 0, -0.444635, 0.895712, 0, 6.96019, 11.882)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, -0.0669873, 0.965926, 0.25, -0.25, -0.258819, 0.933013, 0, 2, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ik85x")
+
+[node name="Tadpole" parent="." instance=ExtResource("2_gypdm")]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "0"

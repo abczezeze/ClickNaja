@@ -1,13 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://5jncdr384qng"]
+[gd_scene load_steps=11 format=3 uid="uid://5jncdr384qng"]
 
 [ext_resource type="Script" path="res://Scripts/Tadpole.cs" id="1_mex1q"]
 [ext_resource type="Texture2D" uid="uid://c54rcb3jqgsh0" path="res://Models/tadpole_RecColor.png" id="2_pbm8h"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m28j5"]
+cull_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.025
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_laibb"]
 resource_name = "TadpolTT"
-cull_mode = 2
+next_pass = SubResource("StandardMaterial3D_m28j5")
+diffuse_mode = 3
+specular_mode = 1
 albedo_texture = ExtResource("2_pbm8h")
-roughness = 0.5
+metallic = 0.28
+roughness = 0.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g5p3t"]
 resource_name = "tadpole_Sphere_001"
@@ -151,12 +160,13 @@ _data = {
 script = ExtResource("1_mex1q")
 
 [node name="Tadpole_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_g5p3t")
 skeleton = NodePath("")
 blend_shapes/eye = 0.0
 blend_shapes/mouth = 0.0
 blend_shapes/smile = 0.0
-blend_shapes/tail = -0.793106
+blend_shapes/tail = -0.805416
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

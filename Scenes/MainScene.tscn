@@ -15,6 +15,8 @@ sky_material = SubResource("ProceduralSkyMaterial_n1is6")
 [sub_resource type="Environment" id="Environment_ik85x"]
 background_mode = 2
 sky = SubResource("Sky_a3v11")
+glow_enabled = true
+glow_blend_mode = 0
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_m0mfw")
@@ -28,10 +30,10 @@ transform = Transform3D(0.965926, 0, 0.258819, -0.0669873, 0.965926, 0.25, -0.25
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ik85x")
 
-[node name="Tadpole" parent="." instance=ExtResource("2_gypdm")]
-
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 30
 text = "0"
+
+[node name="Tadpole" parent="." instance=ExtResource("2_gypdm")]

@@ -51,5 +51,6 @@ public partial class Tadpole : Area3D
 	{
 		clicked = false;
 		tadpoleAnimationPlayer.Play("Idle");
+		QueueFree();
 	}
 }

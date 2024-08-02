@@ -14,9 +14,16 @@ config/name="ClickNaja"
 run/main_scene="res://Scenes/MainScene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=3
+window/stretch/mode="viewport"
+
 [dotnet]
 
-project/assembly_name="Fill Heart"
+project/assembly_name="ClickNaja"
 
 [input]
 

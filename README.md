@@ -1,4 +1,4 @@
-# simple click game in C# Godot
+# simple click game in C# Godot4.3
 <img src="https://github.com/abczezeze/ClickNaja/blob/main/ss/ClickNaja321.gif" height='300' weight ='100'>
 <img src="https://github.com/abczezeze/ClickNaja/blob/main/ss/ss_GeometricBowlingGame.gif" height='300' weight ='100'>
 

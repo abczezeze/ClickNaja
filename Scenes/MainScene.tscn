@@ -1,39 +1,98 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwuwpwr0wfgji"]
+[gd_scene load_steps=11 format=3 uid="uid://dwuwpwr0wfgji"]
 
 [ext_resource type="Script" path="res://Scripts/MainScene.cs" id="1_m0mfw"]
 [ext_resource type="PackedScene" uid="uid://5jncdr384qng" path="res://Scenes/Tadpole.tscn" id="2_gypdm"]
+[ext_resource type="PackedScene" uid="uid://bv6abbhm652tm" path="res://Scenes/Algae.tscn" id="3_6ktbc"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n1is6"]
-sky_top_color = Color(0.26011, 0.69825, 0.999754, 1)
-sky_horizon_color = Color(0.161729, 0.696606, 1, 1)
-ground_bottom_color = Color(0, 0.469556, 0.692429, 1)
-ground_horizon_color = Color(7.5084e-06, 0.708502, 0.975164, 1)
+[sub_resource type="Shader" id="Shader_jra34"]
+code = "shader_type sky;
+uniform vec3 sky_color : source_color;
+
+void sky() {
+	// Called for every visible pixel in the sky background, as well as all pixels
+	// in the radiance cubemap.
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qrwc"]
+shader = SubResource("Shader_jra34")
+shader_parameter/sky_color = Color(0.373657, 0.689818, 0.409789, 1)
 
 [sub_resource type="Sky" id="Sky_a3v11"]
-sky_material = SubResource("ProceduralSkyMaterial_n1is6")
+sky_material = SubResource("ShaderMaterial_3qrwc")
 
 [sub_resource type="Environment" id="Environment_ik85x"]
 background_mode = 2
 sky = SubResource("Sky_a3v11")
-glow_enabled = true
+ssr_fade_in = 2.23928
+ssr_depth_tolerance = 43.41
+glow_normalized = true
+glow_intensity = 1.53
+glow_strength = 0.64
+glow_bloom = 0.85
 glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(0.316049, 0.516349, 1, 1)
+fog_light_energy = 2.92
+fog_density = 0.05
+fog_aerial_perspective = 0.616
+volumetric_fog_albedo = Color(0.565446, 0.568429, 1, 1)
+volumetric_fog_emission = Color(0.31802, 0.31802, 0.31802, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.93
+adjustment_contrast = 1.21
+adjustment_saturation = 0.96
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_1ci51"]
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xiqib"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q5roh"]
+size = Vector3(100, 1, 100)
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_m0mfw")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.895712, 0.444635, 0, -0.444635, 0.895712, 0, 6.96019, 11.882)
+transform = Transform3D(-0.973162, -0.0144814, 0.229665, 0.138094, 0.761595, 0.633169, -0.184081, 0.647892, -0.739156, 2.49378, 6.77361, -12.6902)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.965926, 0, 0.258819, -0.0669873, 0.965926, 0.25, -0.25, -0.258819, 0.933013, 0, 2, 0)
+transform = Transform3D(-0.671721, -0.185483, 0.717208, 0, 0.968148, 0.25038, -0.740805, 0.168185, -0.650325, 0, 10, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ik85x")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 30
 text = "0"
 
 [node name="Tadpole" parent="." instance=ExtResource("2_gypdm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_1ci51")
+
+[node name="CSGMesh3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_xiqib")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/CSGMesh3D"]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CSGMesh3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_q5roh")
+
+[node name="Algae2c2" parent="." instance=ExtResource("3_6ktbc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.169, -1, 0)
+
+[node name="Algae2c4" parent="." instance=ExtResource("3_6ktbc")]
+transform = Transform3D(0.700896, 0, -0.266917, 0, 0.75, 0, 0.266917, 0, 0.700896, 7.283, -1, 0)
+
+[node name="Algae2c3" parent="." instance=ExtResource("3_6ktbc")]
+transform = Transform3D(0.831352, 0, 0.382203, 0, 0.915, 0, -0.382203, 0, 0.831352, 9.484, -1, 0.878)

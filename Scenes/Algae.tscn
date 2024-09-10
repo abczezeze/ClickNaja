@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv6abbhm652tm"]
+
+[ext_resource type="PackedScene" uid="uid://8euyblyiqo2m" path="res://Models/Algae2c.glb" id="1_dilcb"]
+[ext_resource type="Script" path="res://Scripts/Algae.cs" id="2_k3as5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21ihn"]
+albedo_color = Color(4.09111e-07, 0.534509, 0.105464, 1)
+
+[sub_resource type="Animation" id="Animation_sovo0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Algae2c:blend_shapes/LR")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.0]
+}
+
+[sub_resource type="Animation" id="Animation_q8cew"]
+resource_name = "Sway"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Algae2c:blend_shapes/LR")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_goxqj"]
+_data = {
+"RESET": SubResource("Animation_sovo0"),
+"Sway": SubResource("Animation_q8cew")
+}
+
+[node name="Algae2c2" instance=ExtResource("1_dilcb")]
+script = ExtResource("2_k3as5")
+
+[node name="Algae2c" parent="." index="0"]
+blend_shapes/LR = -1.0
+surface_material_override/0 = SubResource("StandardMaterial3D_21ihn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_goxqj")
+}

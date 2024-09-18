@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="ClickNaja"
-run/main_scene="res://Scenes/Bowling.tscn"
+run/main_scene="res://Scenes/MainScene.tscn"
 config/features=PackedStringArray("4.3", "C#", "Mobile")
+
+[autoload]
+
+Globals="*res://Scenes/Globals.tscn"
 
 [display]
 

@@ -3,15 +3,16 @@ using Godot;
 
 public partial class MainScene : Node3D
 {
-	Tadpole duplicatetadpole;
-	Label clickLabel;
+	Tadpole dupTadpole;
+	//Label clickLabel;
 	private bool _rightClickedThisFrame = false;
     private Vector2 _rightClickMousePos;
 	public override void _Ready()
 	{
+		Globals._levelOnePlay();
 		//worldMain = GetNode<WorldEnvironment>("WorldEnvironment");
-		duplicatetadpole = GetNode<Tadpole>("Tadpole");
-		clickLabel = GetNode<Label>("Label");
+		dupTadpole = GetNode<Tadpole>("Tadpole");
+		//clickLabel = GetNode<Label>("Label");
 		/*for(int i=0;i<=10;i++)
 		{
 			AddChild(duplicatetadpole.Duplicate());
@@ -46,7 +47,7 @@ public partial class MainScene : Node3D
 			var result = spaceState.IntersectRay(query);
 			if (result.Count > 0)
 			{
-				duplicatetadpole.SetTargetPosition(result["position"].AsVector3());
+				dupTadpole.SetTargetPosition(result["position"].AsVector3());
 				GD.Print(result["position"]);
 				
 			}

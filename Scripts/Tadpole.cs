@@ -78,7 +78,7 @@ public partial class Tadpole : CharacterBody3D
     }*/
 	private void _OnAnimationFinished(StringName animationName)
 	{
-		clicked = false;
+		// clicked = false;
 		tadpoleAnimationPlayer.Play("Idle");
 		QueueFree();
 	}
